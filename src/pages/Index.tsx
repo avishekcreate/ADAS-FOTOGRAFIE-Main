@@ -1,32 +1,47 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../integrations/supabase/client";
 
-export default function Gallery() {
-  const [photos, setPhotos] = useState<any[]>([]);
+type Photo = {
+  id: number;
+  title: string;
+  description: string;
+  url: string;
+};
+
+export default function Index() {
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadPhotos() {
-      let { data, error } = await supabase
-        .from("photos")
-        .select("id, title, description, image_url");
-
+    const fetchPhotos = async () => {
+      const { data, error } = await supabase.from("photos").select("*");
       if (error) {
-        console.error("Error loading photos:", error);
+        console.error("Error fetching photos:", error);
       } else {
         setPhotos(data || []);
       }
-    }
+      setLoading(false);
+    };
 
-    loadPhotos();
+    fetchPhotos();
   }, []);
 
+  if (loading) return <p>Loading photos...</p>;
+
   return (
-    <div className="grid grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
       {photos.map((photo) => (
-        <div key={photo.id} className="rounded shadow p-2">
-          <img src={photo.image_url} alt={photo.title} className="rounded" />
-          <h3 className="font-bold mt-2">{photo.title}</h3>
-          <p className="text-sm">{photo.description}</p>
+        <div
+          key={photo.id}
+          className="border rounded-lg shadow-lg p-4 flex flex-col items-center"
+        >
+          <img
+            src={photo.url}
+            alt={photo.title}
+            className="w-full h-48 object-cover rounded-md mb-4"
+          />
+          <h2 className="text-lg font-semibold">{photo.title}</h2>
+          <p className="text-gray-600">{photo.description}</p>
         </div>
       ))}
     </div>
