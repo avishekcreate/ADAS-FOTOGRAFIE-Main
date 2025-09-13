@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Photography Portfolio Design System - Monochromatic Elegance */
+
+@layer base {
+  :root {
+    /* Core monochromatic palette */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 8%;
+    
+    /* Surface colors */
+    --surface: 0 0% 100%;
+    --surface-secondary: 0 0% 96%;
+    --surface-tertiary: 0 0% 94%;
+    
+    /* Text hierarchy */
+    --text-primary: 0 0% 8%;
+    --text-secondary: 0 0% 25%;
+    --text-muted: 0 0% 45%;
+    --text-subtle: 0 0% 65%;
+    
+    /* Interactive states */
+    --hover: 0 0% 4%;
+    --active: 0 0% 0%;
+    --overlay: 0 0% 0%;
+    --overlay-light: 0 0% 8%;
+    
+    /* Borders and dividers */
+    --border: 0 0% 88%;
+    --border-subtle: 0 0% 92%;
+    
+    /* Shadows and effects */
+    --shadow-soft: 0 0% 0%;
+    --shadow-medium: 0 0% 0%;
+    --shadow-strong: 0 0% 0%;
+    
+    /* Animation timings */
+    --transition-fast: 0.2s;
+    --transition-normal: 0.3s;
+    --transition-slow: 0.5s;
+    
+    /* Spacing and sizing */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Core dark theme palette */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+    
+    /* Surface colors */
+    --surface: 0 0% 12%;
+    --surface-secondary: 0 0% 16%;
+    --surface-tertiary: 0 0% 20%;
+    
+    /* Text hierarchy */
+    --text-primary: 0 0% 95%;
+    --text-secondary: 0 0% 80%;
+    --text-muted: 0 0% 60%;
+    --text-subtle: 0 0% 45%;
+    
+    /* Interactive states */
+    --hover: 0 0% 95%;
+    --active: 0 0% 100%;
+    --overlay: 0 0% 0%;
+    --overlay-light: 0 0% 95%;
+    
+    /* Borders and dividers */
+    --border: 0 0% 25%;
+    --border-subtle: 0 0% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-montserrat;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+}
+
+@layer components {
+  /* Vertical floating animations for columns */
+  .animate-vertical-float-1 {
+    animation: verticalFloat1 8s ease-in-out infinite;
+  }
+  
+  .animate-vertical-float-2 {
+    animation: verticalFloat2 9s ease-in-out infinite;
+  }
+  
+  .animate-vertical-float-3 {
+    animation: verticalFloat3 7s ease-in-out infinite;
+  }
+  
+  .animate-vertical-float-4 {
+    animation: verticalFloat4 10s ease-in-out infinite;
+  }
+  
+  /* Hover overlay transitions */
+  .photo-overlay {
+    @apply absolute inset-0 bg-overlay/0 transition-all duration-300 ease-out;
+    @apply flex items-end p-6 opacity-0;
+  }
+  
+  .photo-card:hover .photo-overlay {
+    @apply bg-overlay/75 opacity-100;
+  }
+  
+  .photo-card:hover img {
+    @apply scale-105;
+  }
+  
+  /* Modal backdrop */
+  .modal-backdrop {
+    @apply fixed inset-0 bg-overlay/90 backdrop-blur-sm;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* Dialog boxes styling */
+  .intro-dialog {
+    @apply bg-surface border border-border-subtle rounded-lg p-6;
+    @apply shadow-lg shadow-shadow-soft/10;
+    @apply transform transition-all duration-300 ease-out;
+  }
+  
+  .intro-dialog:hover {
+    @apply scale-105 shadow-xl shadow-shadow-medium/20;
+  }
+}
+
+@layer utilities {
+  /* Custom animation keyframes */
+  @keyframes verticalFloat1 {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes verticalFloat2 {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(25px); }
+  }
+  
+  @keyframes verticalFloat3 {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  @keyframes verticalFloat4 {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(30px); }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Text hierarchy utilities */
+  .text-hero {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+    color: hsl(var(--text-primary));
+  }
+  
+  .text-title {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight;
+    color: hsl(var(--text-primary));
+  }
+  
+  .text-subtitle {
+    @apply text-lg font-medium;
+    color: hsl(var(--text-secondary));
+  }
+  
+  .text-body {
+    @apply text-base font-normal leading-relaxed;
+    color: hsl(var(--text-secondary));
+  }
+  
+  .text-caption {
+    @apply text-sm font-normal;
+    color: hsl(var(--text-muted));
+  }
+  
+  .text-label {
+    @apply text-xs font-medium uppercase tracking-wider;
+    color: hsl(var(--text-subtle));
+  }
+  /* Vertical floating animations for photo columns */
+  @keyframes vertical-float-1 {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  @keyframes vertical-float-2 {
+    0%, 100% { transform: translateY(-10px); }
+    50% { transform: translateY(5px); }
+  }
+  
+  @keyframes vertical-float-3 {
+    0%, 100% { transform: translateY(5px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes vertical-float-4 {
+    0%, 100% { transform: translateY(-5px); }
+    50% { transform: translateY(10px); }
+  }
+  
+  .animate-vertical-float-1 {
+    animation: vertical-float-1 8s ease-in-out infinite;
+  }
+  
+  .animate-vertical-float-2 {
+    animation: vertical-float-2 10s ease-in-out infinite;
+  }
+  
+  .animate-vertical-float-3 {
+    animation: vertical-float-3 12s ease-in-out infinite;
+  }
+  
+  .animate-vertical-float-4 {
+    animation: vertical-float-4 9s ease-in-out infinite;
+  }
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
